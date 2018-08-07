@@ -23,7 +23,7 @@ defmodule RDAP do
   end
 
   def lookup_ip(ip, query_base) do
-    url = "#{query_base}/ip/#{ip}"
+    url = "#{query_base}ip/#{ip}"
     Logger.debug fn -> "RDAP query: GET #{url}" end
 
     with %HTTPotion.Response{body: body, status_code: 200} <- HTTPotion.get(url),

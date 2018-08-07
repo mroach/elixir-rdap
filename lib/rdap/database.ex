@@ -68,7 +68,7 @@ defmodule RDAP.Database do
       iex> data = %{ "services" => [ [["8.0.0.0/8"], ["http://rdap.example.net"]] ] }
       ...> RDAP.Database.load_iana(data)
       [
-        %RDAP.NIC{ blocks: [{{8,0,0,0},{8,255,255,255},8}], endpoints: ["http://rdap.example.net"] }
+        %RDAP.NIC{ blocks: [{{8,0,0,0},{8,255,255,255},8}], endpoints: ["http://rdap.example.net/"] }
       ]
   """
   def load_iana(data) do
@@ -77,8 +77,12 @@ defmodule RDAP.Database do
     |> Enum.map(fn service ->
         %NIC{
           blocks: service |> Enum.at(0) |> Enum.map(&InetCidr.parse/1),
-          endpoints: Enum.at(service, 1)
+          endpoints: Enum.at(service, 1) |> Enum.map(&normalize_endpoint/1)
         }
       end)
+  end
+
+  defp normalize_endpoint(endpoint) do
+    if String.ends_with?(endpoint, "/"), do: endpoint, else: "#{endpoint}/"
   end
 end

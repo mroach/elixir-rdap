@@ -15,12 +15,12 @@ defmodule RDAP.DatabaseTest do
   describe "Database.find_nic_for/1" do
     test "can find RDAP servers for ARIN string IP" do
       result = Database.find_nic_for("8.8.8.8")
-      assert Enum.member?(result.endpoints, "http://rdap.arin.net/registry")
+      assert Enum.member?(result.endpoints, "http://rdap.arin.net/registry/")
     end
 
     test "can find RDAP servers for ARIN tuple IP" do
       result = Database.find_nic_for({8, 8, 8, 8})
-      assert Enum.member?(result.endpoints, "http://rdap.arin.net/registry")
+      assert Enum.member?(result.endpoints, "http://rdap.arin.net/registry/")
     end
 
     test "does not find an RDAP server for reserved IP" do
