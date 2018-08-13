@@ -77,7 +77,7 @@ defmodule RDAP.Database do
     |> Enum.map(fn service ->
         %NIC{
           blocks: service |> Enum.at(0) |> Enum.map(&InetCidr.parse/1),
-          endpoints: Enum.at(service, 1) |> Enum.map(&normalize_endpoint/1)
+          endpoints: service |> Enum.at(1) |> Enum.map(&normalize_endpoint/1)
         }
       end)
   end

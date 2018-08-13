@@ -7,7 +7,7 @@ defmodule RDAP do
 
   use Application
   require Logger
-  alias RDAP.{Database, NIC}
+  alias RDAP.{Database, NIC, Response}
 
   def start(_type, _args), do: RDAP.Supervisor.start_link()
 
@@ -26,10 +26,13 @@ defmodule RDAP do
     url = "#{query_base}ip/#{ip}"
     Logger.debug fn -> "RDAP query: GET #{url}" end
 
-    with %HTTPotion.Response{body: body, status_code: 200} <- HTTPotion.get(url),
-         {:ok, json} <- Poison.decode(body)
+    # The Poison docs generally advises against using atoms as keys because
+    # they're never garbage collected. However, we know there are only a couple dozen
+    # keys that ever appear in RDAP responses, so this isn't a real worry.
+    with {:ok, %HTTPoison.Response{body: body, status_code: 200}} <- HTTPoison.get(url, [], [follow_redirect: true]),
+         {:ok, json} <- Poison.decode(body, keys: :atoms)
     do
-      {:ok, json}
+      {:ok, Response.from_json(json)}
     else
       err -> {:error, err}
     end
