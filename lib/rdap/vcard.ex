@@ -5,6 +5,7 @@ defmodule RDAP.VCard do
   """
 
   alias __MODULE__
+  alias RDAP.VCard.{Phone}
 
   defstruct [:raw_data]
 
@@ -40,14 +41,22 @@ defmodule RDAP.VCard do
 
   @doc """
   Gets the phone number.
-  TODO: Structure to include types (e.g. work, mobile)
 
   Example:
       iex> %RDAP.VCard{raw_data: [ ["email", %{}, "text", "i@example.org"], ["tel", %{type: "work"}, "text", "+1-888-555-1212"] ]}
       ...> |> RDAP.VCard.phone
-      "+1-888-555-1212"
+      %RDAP.VCard.Phone{types: ["work"], number: "+1-888-555-1212"}
+
+      iex> %RDAP.VCard{raw_data: [ ["email", %{}, "text", "i@example.org"] ]}
+      ...> |> RDAP.VCard.phone
+      nil
   """
-  def phone(%VCard{} = card), do: card |> find_field("tel") |> text_value
+  def phone(%VCard{} = card) do
+    case find_field(card, "tel") do
+      nil -> nil
+      val -> Phone.parse(val)
+    end
+  end
 
   @doc """
   Finds the address in the vCard. Some addresses use the "label" attribute to provide
