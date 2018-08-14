@@ -5,7 +5,7 @@ defmodule RDAP.VCard do
   """
 
   alias __MODULE__
-  alias RDAP.VCard.{Phone}
+  alias RDAP.VCard.{Address, Phone}
 
   defstruct [:raw_data]
 
@@ -62,22 +62,24 @@ defmodule RDAP.VCard do
   Finds the address in the vCard. Some addresses use the "label" attribute to provide
   the formatted address. If this is available, we'll use that.
   If not, we'll use the array of values [Addressee, Street, City, State, Postcode, Country]
-  TODO: Structure to include the "type" attribute (e.g. work, home)
 
   Example:
       iex> %RDAP.VCard{raw_data: [ ["adr", %{label: "123 Pumpkin St\\nCandyland\\nXX\\n00000\\nUSA"}, "text", [""] ] ]}
       ...> |> RDAP.VCard.address
-      ["123 Pumpkin St", "Candyland", "XX", "00000", "USA"]
+      %RDAP.VCard.Address{lines: ["123 Pumpkin St", "Candyland", "XX", "00000", "USA"]}
 
       iex> %RDAP.VCard{raw_data: [ ["adr", %{type: "work"}, "text", ["CandyCorp", "123 Pumpkin St", "Candyland", "XX", "00000", "USA"] ] ]}
       ...> |> RDAP.VCard.address
-      ["CandyCorp", "123 Pumpkin St", "Candyland", "XX", "00000", "USA"]
+      %RDAP.VCard.Address{type: "work", lines: ["CandyCorp", "123 Pumpkin St", "Candyland", "XX", "00000", "USA"]}
+
+      iex> %RDAP.VCard{raw_data: [ ]}
+      ...> |> RDAP.VCard.address
+      nil
   """
   def address(%VCard{} = card) do
     case find_field(card, "adr") do
-      [_, %{label: label}, "text" | _] -> String.split(label, "\n")
-      [_, _, "text", lines] -> lines
-      _ -> nil
+      nil -> nil
+      val -> Address.parse(val)
     end
   end
 
