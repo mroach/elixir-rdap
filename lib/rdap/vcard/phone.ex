@@ -21,16 +21,35 @@ defmodule RDAP.VCard.Phone do
       iex> RDAP.VCard.Phone.parse(["tel", %{type: "work"}, "text", "+18885551212"])
       %RDAP.VCard.Phone{types: ["work"], number: "+18885551212"}
 
-      iex> RDAP.VCard.Phone.parse(["tel", %{}, "text", "+18885551212"])
+      iex> RDAP.VCard.Phone.parse(["tel", %{}, "text", "tel:+18885551212"])
       %RDAP.VCard.Phone{number: "+18885551212"}
   """
-  def parse(["tel", %{type: types}, "text", val]) when is_list(types) do
-    %Phone{types: types, number: val}
-  end
-  def parse(["tel", %{type: type}, "text", val]) when is_binary(type) do
-    %Phone{types: [type], number: val}
+  def parse(["tel", %{type: type_or_types}, "text", number]) do
+    %Phone{}
+    |> put_number(number)
+    |> put_types(type_or_types)
   end
   def parse(["tel", %{}, "text", val]) do
-    %Phone{number: val}
+    %Phone{}
+    |> put_number(val)
+  end
+
+  def put_number(%Phone{} = phone, value) do
+    phone
+    |> Map.put(:number, clean_phone(value))
+  end
+
+  def put_types(%Phone{} = phone, types) when is_list(types) do
+    phone
+    |> Map.put(:types, types)
+  end
+  def put_types(%Phone{} = phone, type) do
+    phone
+    |> put_types([type])
+  end
+
+  def clean_phone(val) do
+    val
+    |> String.replace("tel:", "")
   end
 end
