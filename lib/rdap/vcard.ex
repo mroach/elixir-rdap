@@ -66,7 +66,7 @@ defmodule RDAP.VCard do
   Example:
       iex> %RDAP.VCard{raw_data: [ ["adr", %{label: "123 Pumpkin St\\nCandyland\\nXX\\n00000\\nUSA"}, "text", [""] ] ]}
       ...> |> RDAP.VCard.address
-      %RDAP.VCard.Address{lines: ["123 Pumpkin St", "Candyland", "XX", "00000", "USA"]}
+      %RDAP.VCard.Address{formatted: "123 Pumpkin St\\nCandyland\\nXX\\n00000\\nUSA", lines: [""]}
 
       iex> %RDAP.VCard{raw_data: [ ["adr", %{type: "work"}, "text", ["CandyCorp", "123 Pumpkin St", "Candyland", "XX", "00000", "USA"] ] ]}
       ...> |> RDAP.VCard.address

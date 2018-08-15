@@ -5,29 +5,30 @@ defmodule RDAP.VCard.Address do
 
   alias __MODULE__
 
-  defstruct [:type, :lines]
+  defstruct [:type, :lines, :formatted]
 
   @doc """
   Parses an address from a vCard element.
 
-  Often addresses come pre-formatted under the "label" attribute.
-  When these are present, they're split into lines and used as the address.
+  Often addresses come pre-formatted under the "label" attribute. These will
+  go into the `formatted` attribute. In many cases it would be possible to simply
+  split on newline and use this instead of the address lines. However the responses
+  aren't uniform enough. Many lack addressee, some don't split the city and postcode,
+  many omit at least one element.
 
   Examples:
-      iex> RDAP.VCard.Address.parse(["adr", %{label: "123 Pumpkin St\\nCandyland\\nXX\\n00000\\nUSA"}, "text", [""]])
-      %RDAP.VCard.Address{lines: ["123 Pumpkin St", "Candyland", "XX", "00000", "USA"]}
+      iex> RDAP.VCard.Address.parse(["adr", %{label: "88 Lucky Ave\\nChinatown\\nXX\\n00000\\nUSA"}, "text", [""]])
+      %RDAP.VCard.Address{formatted: "88 Lucky Ave\\nChinatown\\nXX\\n00000\\nUSA", lines: [""]}
 
       iex> RDAP.VCard.Address.parse(["adr", %{type: "work"}, "text", ["CandyCorp", "123 Pumpkin St", "Candyland", "XX", "00000", "USA"]])
       %RDAP.VCard.Address{type: "work", lines: ["CandyCorp", "123 Pumpkin St", "Candyland", "XX", "00000", "USA"]}
   """
   def parse(["adr", attrs, "text", lines]) do
-    %Address{type: Map.get(attrs, :type), lines: extract_address(attrs, lines)}
+    %Address{}
+    |> Map.put(:type, Map.get(attrs, :type))
+    |> Map.put(:formatted, Map.get(attrs, :label))
+    |> Map.put(:lines, lines)
   end
-
-  def extract_address(%{label: formatted}, _) do
-    String.split(formatted, "\n")
-  end
-  def extract_address(_, lines), do: lines
 
   @doc """
   Example:
