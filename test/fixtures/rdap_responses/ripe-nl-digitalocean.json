@@ -1,0 +1,124 @@
+{
+  "handle": "128.199.0.0 - 128.199.255.255",
+  "startAddress": "128.199.0.0/32",
+  "endAddress": "128.199.255.255/32",
+  "ipVersion": "v4",
+  "name": "DOPI1",
+  "type": "LEGACY",
+  "country": "SG",
+  "parentHandle": "EU-ZZ-128",
+  "entities": [
+    {
+      "handle": "AD10778-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Abuse Department"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "Digital Ocean, 270 Lafayette Street Suite 1105 New York, NY 10012"
+            },
+            "text",
+            null
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "abuse@digitalocean.com"
+          ]
+        ]
+      ],
+      "roles": [
+        "abuse"
+      ],
+      "entities": [
+        {
+          "handle": "digitalocean",
+          "roles": [
+            "registrant"
+          ],
+          "objectClassName": "entity"
+        }
+      ],
+      "objectClassName": "entity"
+    }
+  ],
+  "remarks": [
+    {
+      "description": [
+        "DigitalOcean Cloud"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.db.ripe.net/ip/128.199.232.107",
+      "rel": "self",
+      "href": "https://rdap.db.ripe.net/ip/128.199.232.107"
+    },
+    {
+      "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+      "rel": "copyright",
+      "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+    }
+  ],
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2015-05-05T03:52:51Z"
+    }
+  ],
+  "rdapConformance": [
+    "rdap_level_0"
+  ],
+  "notices": [
+    {
+      "title": "Filtered",
+      "description": [
+        "This output has been filtered."
+      ]
+    },
+    {
+      "title": "Source",
+      "description": [
+        "Objects returned came from source",
+        "RIPE"
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the RIPE Database query service. The objects are in RDAP format."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/ip/128.199.232.107",
+          "rel": "terms-of-service",
+          "href": "http://www.ripe.net/db/support/db-terms-conditions.pdf",
+          "type": "application/pdf"
+        }
+      ]
+    }
+  ],
+  "port43": "whois.ripe.net",
+  "objectClassName": "ip network"
+}

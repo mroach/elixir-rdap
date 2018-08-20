@@ -7,7 +7,32 @@ defmodule RDAP.VCard do
   alias __MODULE__
   alias RDAP.VCard.{Address, Phone}
 
-  defstruct [:raw_data]
+  defstruct raw_data: [],
+            email: nil,
+            kind: nil,
+            formatted_name: nil,
+            phone: nil,
+            address: nil
+
+  @doc """
+  Parse an array of vcard values into a vcard
+
+  Example:
+      iex> RDAP.VCard.parse([ ["email", %{}, "text", "i@example.org"] ])
+      %RDAP.VCard{
+        raw_data: [ ["email", %{}, "text", "i@example.org"]],
+        email: "i@example.org",
+        formatted_name: nil
+      }
+  """
+  def parse(raw) do
+    %VCard{raw_data: raw}
+    |> Map.put(:email, email(raw))
+    |> Map.put(:formatted_name, formatted_name(raw))
+    |> Map.put(:kind, kind(raw))
+    |> Map.put(:phone, phone(raw))
+    |> Map.put(:address, address(raw))
+  end
 
   @doc """
   Find the email in the vCard
@@ -17,7 +42,7 @@ defmodule RDAP.VCard do
       ...> |> RDAP.VCard.email
       "i@example.org"
   """
-  def email(%VCard{} = card), do: card |> find_field("email") |> text_value
+  def email(card), do: card |> find_field("email") |> text_value
 
   @doc """
   Card type. Usually one of: application, individual, group, location, organization
@@ -27,7 +52,7 @@ defmodule RDAP.VCard do
       ...> |> RDAP.VCard.kind
       "individual"
   """
-  def kind(%VCard{} = card), do: card |> find_field("kind") |> text_value
+  def kind(card), do: card |> find_field("kind") |> text_value
 
   @doc """
   Find the formatted name "fn" field from the vCard
@@ -37,7 +62,7 @@ defmodule RDAP.VCard do
       ...> |> RDAP.VCard.formatted_name
       "Fancy Corp"
   """
-  def formatted_name(%VCard{} = card), do: card |> find_field("fn") |> text_value
+  def formatted_name(card), do: card |> find_field("fn") |> text_value
 
   @doc """
   Gets the phone number.
@@ -51,7 +76,7 @@ defmodule RDAP.VCard do
       ...> |> RDAP.VCard.phone
       nil
   """
-  def phone(%VCard{} = card) do
+  def phone(card) do
     case find_field(card, "tel") do
       nil -> nil
       val -> Phone.parse(val)
@@ -76,7 +101,7 @@ defmodule RDAP.VCard do
       ...> |> RDAP.VCard.address
       nil
   """
-  def address(%VCard{} = card) do
+  def address(card) do
     case find_field(card, "adr") do
       nil -> nil
       val -> Address.parse(val)
@@ -91,7 +116,8 @@ defmodule RDAP.VCard do
       ...> |> RDAP.VCard.find_field("fn")
       ["fn", {}, "text", "Fancy Corp"]
   """
-  def find_field(%VCard{raw_data: data} = _, field_name) do
+  def find_field(%{raw_data: data} = _, field_name), do: find_field(data, field_name)
+  def find_field(data, field_name) when is_list(data) do
     Enum.find(data, fn el -> Enum.at(el, 0) == field_name end)
   end
 
