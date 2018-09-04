@@ -10,7 +10,7 @@ defmodule RDAP.Supervisor do
 
   def init(_default) do
     children = [
-      {RDAP.Database, Application.get_env(:rdap, :ipv4_relpath)}
+      {RDAP.Database, Application.app_dir(:rdap, "priv/iana/ipv4.json")}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
