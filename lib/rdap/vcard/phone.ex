@@ -21,15 +21,15 @@ defmodule RDAP.VCard.Phone do
       iex> RDAP.VCard.Phone.parse(["tel", %{type: "work"}, "text", "+18885551212"])
       %RDAP.VCard.Phone{types: ["work"], number: "+18885551212"}
 
-      iex> RDAP.VCard.Phone.parse(["tel", %{}, "text", "tel:+18885551212"])
+      iex> RDAP.VCard.Phone.parse(["tel", %{}, "uri", "tel:+18885551212"])
       %RDAP.VCard.Phone{number: "+18885551212"}
   """
-  def parse(["tel", %{type: type_or_types}, "text", number]) do
+  def parse(["tel", %{type: type_or_types}, _, number]) do
     %Phone{}
     |> put_number(number)
     |> put_types(type_or_types)
   end
-  def parse(["tel", %{}, "text", val]) do
+  def parse(["tel", %{}, _, val]) do
     %Phone{}
     |> put_number(val)
   end
