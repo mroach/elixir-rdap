@@ -1,0 +1,188 @@
+{
+  "handle": "213.30.235.104 - 213.30.235.111",
+  "startAddress": "213.30.235.104/32",
+  "endAddress": "213.30.235.111/32",
+  "ipVersion": "v4",
+  "name": "EMISSIONSHAUS-VERSATEL",
+  "type": "ASSIGNED PA",
+  "country": "DE",
+  "parentHandle": "DE-VERSATEL-20000105",
+  "entities": [
+    {
+      "handle": "VTH-RIPE",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Versatel Hostmaster"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "Versatel West GmbH\nUnterste-Wilms-Strasse 29\n44143 Dortmund\nGermany"
+            },
+            "text",
+            null
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+49 (0) 231 399 0"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "internet-engineering@versatel.de"
+          ]
+        ]
+      ],
+      "roles": [
+        "abuse"
+      ],
+      "entities": [
+        {
+          "handle": "AD8061-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "BS4675-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "DAM666-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "FF9999-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "KL1054-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "SP15435-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "TK1586-RIPE",
+          "roles": [
+            "administrative",
+            "technical"
+          ],
+          "objectClassName": "entity"
+        },
+        {
+          "handle": "VT-ENGI-MNT",
+          "roles": [
+            "registrant"
+          ],
+          "objectClassName": "entity"
+        }
+      ],
+      "objectClassName": "entity"
+    }
+  ],
+  "remarks": [
+    {
+      "description": [
+        "Promotion-Company"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.db.ripe.net/ip/213.30.235.110",
+      "rel": "self",
+      "href": "https://rdap.db.ripe.net/ip/213.30.235.110"
+    },
+    {
+      "value": "http://www.ripe.net/data-tools/support/documentation/terms",
+      "rel": "copyright",
+      "href": "http://www.ripe.net/data-tools/support/documentation/terms"
+    }
+  ],
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2005-03-30T12:08:48Z"
+    }
+  ],
+  "rdapConformance": [
+    "rdap_level_0"
+  ],
+  "notices": [
+    {
+      "title": "Filtered",
+      "description": [
+        "This output has been filtered."
+      ]
+    },
+    {
+      "title": "Source",
+      "description": [
+        "Objects returned came from source",
+        "RIPE"
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the RIPE Database query service. The objects are in RDAP format."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.db.ripe.net/ip/213.30.235.110",
+          "rel": "terms-of-service",
+          "href": "http://www.ripe.net/db/support/db-terms-conditions.pdf",
+          "type": "application/pdf"
+        }
+      ]
+    }
+  ],
+  "port43": "whois.ripe.net",
+  "objectClassName": "ip network"
+}

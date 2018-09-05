@@ -1,0 +1,371 @@
+{
+  "rdapConformance": [
+    "rdap_level_0",
+    "cidr0",
+    "arin_originas0"
+  ],
+  "notices": [
+    {
+      "title": "Terms of Service",
+      "description": [
+        "By using the ARIN RDAP/Whois service, you are agreeing to the RDAP/Whois Terms of Use"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+          "rel": "about",
+          "type": "text/html",
+          "href": "https://www.arin.net/whois_tou.html"
+        }
+      ]
+    },
+    {
+      "title": "Whois Inaccuracy Reporting",
+      "description": [
+        "If you see inaccuracies in the results, please visit: "
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+          "rel": "about",
+          "type": "text/html",
+          "href": "https://www.arin.net/resources/whois_reporting/index.html"
+        }
+      ]
+    },
+    {
+      "title": "Copyright Notice",
+      "description": [
+        "Copyright 1997-2018, American Registry for Internet Numbers, Ltd."
+      ]
+    }
+  ],
+  "handle": "NET-206-34-36-0-1",
+  "startAddress": "206.34.36.0",
+  "endAddress": "206.34.36.255",
+  "ipVersion": "v4",
+  "name": "BREUER-COM",
+  "parentHandle": "NET-206-32-0-0-1",
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "1996-02-12T09:47:12-05:00"
+    },
+    {
+      "eventAction": "registration",
+      "eventDate": "1996-02-12T00:00:00-05:00"
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+      "rel": "self",
+      "type": "application/rdap+json",
+      "href": "https://rdap.arin.net/registry/ip/206.34.36.0"
+    },
+    {
+      "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+      "rel": "alternate",
+      "type": "application/xml",
+      "href": "https://whois.arin.net/rest/net/NET-206-34-36-0-1"
+    },
+    {
+      "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+      "rel": "up",
+      "type": "application/rdap+json",
+      "href": "https://rdap.arin.net/registry/ip/206.32.0.0/14"
+    }
+  ],
+  "entities": [
+    {
+      "handle": "BREUER-1",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Breuer & Co."
+          ],
+          [
+            "adr",
+            {
+              "label": "701 Edgewater Drive\nWakefield\nMA\n01880\nUnited States"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "org"
+          ]
+        ]
+      ],
+      "roles": [
+        "registrant"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+          "rel": "self",
+          "type": "application/rdap+json",
+          "href": "https://rdap.arin.net/registry/entity/BREUER-1"
+        },
+        {
+          "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+          "rel": "alternate",
+          "type": "application/xml",
+          "href": "https://whois.arin.net/rest/org/BREUER-1"
+        }
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2011-09-24T07:30:57-04:00"
+        },
+        {
+          "eventAction": "registration",
+          "eventDate": "1996-02-12T00:00:00-05:00"
+        }
+      ],
+      "entities": [
+        {
+          "handle": "EB130-ARIN",
+          "vcardArray": [
+            "vcard",
+            [
+              [
+                "version",
+                {},
+                "text",
+                "4.0"
+              ],
+              [
+                "adr",
+                {
+                  "label": "Breuer & Co. LLC\r\n401 Edgewater Drive\nWakefield\nMA\n01880\nUnited States"
+                },
+                "text",
+                [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "fn",
+                {},
+                "text",
+                "Elliott Breuer"
+              ],
+              [
+                "n",
+                {},
+                "text",
+                [
+                  "Breuer",
+                  "Elliott",
+                  "",
+                  "",
+                  ""
+                ]
+              ],
+              [
+                "kind",
+                {},
+                "text",
+                "individual"
+              ],
+              [
+                "email",
+                {},
+                "text",
+                "ebreuer@breuer.com"
+              ],
+              [
+                "tel",
+                {
+                  "type": [
+                    "work",
+                    "voice"
+                  ]
+                },
+                "text",
+                "+1-781-246-0010"
+              ]
+            ]
+          ],
+          "roles": [
+            "abuse",
+            "administrative",
+            "technical"
+          ],
+          "links": [
+            {
+              "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+              "rel": "self",
+              "type": "application/rdap+json",
+              "href": "https://rdap.arin.net/registry/entity/EB130-ARIN"
+            },
+            {
+              "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+              "rel": "alternate",
+              "type": "application/xml",
+              "href": "https://whois.arin.net/rest/poc/EB130-ARIN"
+            }
+          ],
+          "events": [
+            {
+              "eventAction": "last changed",
+              "eventDate": "2018-03-01T12:28:04-05:00"
+            },
+            {
+              "eventAction": "registration",
+              "eventDate": "1995-03-31T16:06:30-05:00"
+            }
+          ],
+          "status": [
+            "validated"
+          ],
+          "port43": "whois.arin.net",
+          "objectClassName": "entity"
+        }
+      ],
+      "port43": "whois.arin.net",
+      "objectClassName": "entity"
+    },
+    {
+      "handle": "EB130-ARIN",
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "adr",
+            {
+              "label": "Breuer & Co. LLC\r\n401 Edgewater Drive\nWakefield\nMA\n01880\nUnited States"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Elliott Breuer"
+          ],
+          [
+            "n",
+            {},
+            "text",
+            [
+              "Breuer",
+              "Elliott",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "ebreuer@breuer.com"
+          ],
+          [
+            "tel",
+            {
+              "type": [
+                "work",
+                "voice"
+              ]
+            },
+            "text",
+            "+1-781-246-0010"
+          ]
+        ]
+      ],
+      "roles": [
+        "technical"
+      ],
+      "links": [
+        {
+          "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+          "rel": "self",
+          "type": "application/rdap+json",
+          "href": "https://rdap.arin.net/registry/entity/EB130-ARIN"
+        },
+        {
+          "value": "https://rdap.arin.net/registry/ip/206.34.36.4",
+          "rel": "alternate",
+          "type": "application/xml",
+          "href": "https://whois.arin.net/rest/poc/EB130-ARIN"
+        }
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2018-03-01T12:28:04-05:00"
+        },
+        {
+          "eventAction": "registration",
+          "eventDate": "1995-03-31T16:06:30-05:00"
+        }
+      ],
+      "status": [
+        "validated"
+      ],
+      "port43": "whois.arin.net",
+      "objectClassName": "entity"
+    }
+  ],
+  "port43": "whois.arin.net",
+  "objectClassName": "ip network",
+  "cidr0_cidrs": [
+    {
+      "v4prefix": "206.34.36.0",
+      "length": 24
+    }
+  ],
+  "arin_originas0_originautnums": []
+}

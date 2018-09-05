@@ -1,0 +1,222 @@
+{
+  "rdapConformance": [
+    "history_version_0",
+    "rdap_level_0"
+  ],
+  "notices": [
+    {
+      "title": "Source",
+      "description": [
+        "Objects returned came from source",
+        "APNIC"
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the APNIC WHOIS Database query service. The objects are in RDAP format."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.apnic.net/ip/103.42.255.151",
+          "rel": "terms-of-service",
+          "href": "http://www.apnic.net/db/dbcopyright.html",
+          "type": "text/html"
+        }
+      ]
+    }
+  ],
+  "country": "ID",
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2014-11-14T08:51:34Z"
+    }
+  ],
+  "name": "GOMEDS-ID",
+  "remarks": [
+    {
+      "description": [
+        "PT. GOMEDS NETWORK",
+        "Internet Service Provider",
+        "Jl. Husni Thamrin No. 20",
+        "Limba U2, Kota Gorontalo 96115"
+      ],
+      "title": "description"
+    }
+  ],
+  "type": "ALLOCATED PORTABLE",
+  "startAddress": "103.42.252.0",
+  "ipVersion": "v4",
+  "endAddress": "103.42.255.255",
+  "objectClassName": "ip network",
+  "links": [
+    {
+      "value": "https://rdap.apnic.net/ip/103.42.255.151",
+      "rel": "self",
+      "href": "https://rdap.apnic.net/ip/103.42.252.0/22",
+      "type": "application/rdap+json"
+    }
+  ],
+  "handle": "103.42.252.0 - 103.42.255.255",
+  "entities": [
+    {
+      "roles": [
+        "abuse"
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2018-05-31T22:30:45Z"
+        }
+      ],
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "IRT-GOMEDS-ID"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "group"
+          ],
+          [
+            "adr",
+            {
+              "label": "PT. GOMEDS NETWORK\nJl. Husni Thamrin No. 20\nLimba U2, Kota Gorontalo 96115"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "abuse@gomeds.net.id"
+          ],
+          [
+            "email",
+            {
+              "pref": "1"
+            },
+            "text",
+            "abuse@gomeds.net.id"
+          ]
+        ]
+      ],
+      "objectClassName": "entity",
+      "links": [
+        {
+          "value": "https://rdap.apnic.net/ip/103.42.255.151",
+          "rel": "self",
+          "href": "https://rdap.apnic.net/entity/IRT-GOMEDS-ID",
+          "type": "application/rdap+json"
+        }
+      ],
+      "handle": "IRT-GOMEDS-ID"
+    },
+    {
+      "roles": [
+        "administrative",
+        "technical"
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2014-11-14T08:29:03Z"
+        }
+      ],
+      "vcardArray": [
+        "vcard",
+        [
+          [
+            "version",
+            {},
+            "text",
+            "4.0"
+          ],
+          [
+            "fn",
+            {},
+            "text",
+            "Musanif Mustapa"
+          ],
+          [
+            "kind",
+            {},
+            "text",
+            "individual"
+          ],
+          [
+            "adr",
+            {
+              "label": "Jl. Husni Thamrin No. 20\nLimba U2,Kota Selatan,Kota Gorontalo\nGorontalo - Indonesia"
+            },
+            "text",
+            [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          ],
+          [
+            "tel",
+            {
+              "type": "voice"
+            },
+            "text",
+            "+62-435-834135"
+          ],
+          [
+            "tel",
+            {
+              "type": "fax"
+            },
+            "text",
+            "+62-435-834135"
+          ],
+          [
+            "email",
+            {},
+            "text",
+            "tuntun@gomeds.net.id"
+          ]
+        ]
+      ],
+      "objectClassName": "entity",
+      "links": [
+        {
+          "value": "https://rdap.apnic.net/ip/103.42.255.151",
+          "rel": "self",
+          "href": "https://rdap.apnic.net/entity/MM1523-AP",
+          "type": "application/rdap+json"
+        }
+      ],
+      "handle": "MM1523-AP"
+    }
+  ],
+  "port43": "whois.apnic.net"
+}
