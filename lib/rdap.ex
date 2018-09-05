@@ -11,7 +11,13 @@ defmodule RDAP do
 
   def start(_type, _args), do: RDAP.Supervisor.start_link()
 
-  def lookup_ip(ip) do
+  def lookup_ip(ip) when is_tuple(ip) do
+    ip
+    |> Tuple.to_list
+    |> Enum.join(".")
+    |> lookup_ip
+  end
+  def lookup_ip(ip) when is_binary(ip) do
     with %NIC{} = nic <- Database.find_nic_for(ip),
          server       <- NIC.primary_server(nic)
     do
