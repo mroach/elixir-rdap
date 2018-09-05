@@ -10,9 +10,8 @@ defmodule RDAPTest do
   help to ensure that responses can at least be parsed without dying
   """
   test "all real-world responses can be parsed" do
-    # TODO: Rewrite this using streams or whatever parallel processing magic
     for sample_file <- Path.wildcard("test/fixtures/rdap_responses/**/*.json") do
-      json =  sample_file |> File.read! |> Poison.decode!(keys: :atoms)
+      json = sample_file |> File.read! |> Poison.decode!(keys: :atoms)
       assert %Response{} = Response.from_json(json)
     end
   end
