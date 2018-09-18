@@ -11,7 +11,6 @@ defmodule RDAP.HTTP do
   automatically decode the response. Other types are ignored.
   """
   require Logger
-  alias __MODULE__
   alias RDAP.{Response}
 
   @follow_redirects [301, 302, 303, 307, 308]

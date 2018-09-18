@@ -7,7 +7,7 @@ defmodule RDAP do
 
   use Application
   require Logger
-  alias RDAP.{Database, HTTP, NIC, Response}
+  alias RDAP.{Database, HTTP, NIC}
 
   def start(_type, _args), do: RDAP.Supervisor.start_link()
 
