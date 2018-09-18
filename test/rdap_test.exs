@@ -1,7 +1,6 @@
 defmodule RDAPTest do
   use ExUnit.Case
   alias RDAP.{Response}
-  import Mock
 
   doctest RDAP
 
@@ -14,21 +13,6 @@ defmodule RDAPTest do
     for sample_file <- Path.wildcard("test/fixtures/rdap_responses/**/*.json") do
       json = sample_file |> File.read! |> Poison.decode!(keys: :atoms)
       assert %Response{} = Response.from_json(json)
-    end
-  end
-
-  test "follows 303 redirect" do
-    next_location = "http://example.org"
-    see_other_response = %HTTPoison.Response{
-      status_code: 303,
-      headers: [
-        {"Location", next_location}
-      ]
-    }
-
-    with_mock HTTPoison, [get: fn(^next_location) -> "OK" end] do
-      RDAP.handle_response(see_other_response)
-      assert_called HTTPoison.get(next_location)
     end
   end
 end
