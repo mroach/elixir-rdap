@@ -15,4 +15,9 @@ defmodule RDAPTest do
       assert %Response{} = Response.from_json(json)
     end
   end
+
+  test "detects special IPs" do
+    assert {:error, :special_ip} = RDAP.lookup_ip("127.0.0.1")
+    assert {:error, :special_ip} = RDAP.lookup_ip("192.168.1.12")
+  end
 end

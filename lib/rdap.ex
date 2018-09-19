@@ -7,28 +7,45 @@ defmodule RDAP do
 
   use Application
   require Logger
-  alias RDAP.{Database, HTTP, NIC}
+  alias RDAP.{Database, HTTP, IP, NIC}
 
   def start(_type, _args), do: RDAP.Supervisor.start_link()
 
-  def lookup_ip(ip) when is_tuple(ip) do
+  @doc """
+  Same as `RDAP.query_ip/1` except first checks if an IP is special and if so, doesn't query.
+  """
+  def lookup_ip(ip) do
+    case IP.special?(ip) do
+      true -> {:error, :special_ip}
+      _ -> query_ip(ip)
+    end
+  end
+
+  @doc """
+  Queries the appropriate RDAP server for the given IP.
+  Uses the IANA-provided bootstrap to figure out the best NIC server
+  to query.
+
+  Returns `{:ok, %RDAP.Response{}}` on success or `{:error, reason}` on failure
+  """
+  def query_ip(ip) when is_tuple(ip) do
     ip
     |> Tuple.to_list
     |> Enum.join(".")
-    |> lookup_ip
+    |> query_ip
   end
-  def lookup_ip(ip) when is_binary(ip) do
+  def query_ip(ip) when is_binary(ip) do
     with %NIC{} = nic <- Database.find_nic_for(ip),
          server       <- NIC.primary_server(nic)
     do
       Logger.debug fn -> "RDAP server for #{ip} is #{server}" end
-      lookup_ip(ip, server)
+      query_ip(ip, server)
     else
       err -> {:error, err}
     end
   end
 
-  def lookup_ip(ip, query_base) do
+  def query_ip(ip, query_base) do
     url = "#{query_base}ip/#{ip}"
     Logger.info fn -> "RDAP query: GET #{url}" end
 
