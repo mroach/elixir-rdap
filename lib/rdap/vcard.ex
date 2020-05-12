@@ -117,6 +117,7 @@ defmodule RDAP.VCard do
       ["fn", {}, "text", "Fancy Corp"]
   """
   def find_field(%{raw_data: data} = _, field_name), do: find_field(data, field_name)
+
   def find_field(data, field_name) when is_list(data) do
     Enum.find(data, fn el -> Enum.at(el, 0) == field_name end)
   end

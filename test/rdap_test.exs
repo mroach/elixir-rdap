@@ -11,7 +11,7 @@ defmodule RDAPTest do
   """
   test "all real-world responses can be parsed" do
     for sample_file <- Path.wildcard("test/fixtures/rdap_responses/**/*.json") do
-      json = sample_file |> File.read! |> Poison.decode!(keys: :atoms)
+      json = sample_file |> File.read!() |> Poison.decode!(keys: :atoms)
       assert %Response{} = Response.from_json(json)
     end
   end

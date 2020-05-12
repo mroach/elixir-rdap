@@ -7,6 +7,7 @@ defmodule RDAP.HTTPTest do
 
   test "follows 303 redirect" do
     next_location = "http://example.org"
+
     see_other_response = %HTTPoison.Response{
       status_code: 303,
       headers: [
@@ -14,9 +15,9 @@ defmodule RDAP.HTTPTest do
       ]
     }
 
-    with_mock HTTPoison, [get: fn(^next_location) -> "OK" end] do
+    with_mock HTTPoison, get: fn ^next_location -> "OK" end do
       HTTP.handle_response(see_other_response)
-      assert_called HTTPoison.get(next_location)
+      assert_called(HTTPoison.get(next_location))
     end
   end
 
@@ -40,6 +41,7 @@ defmodule RDAP.HTTPTest do
         {"Content-Type", "text/plain"}
       ]
     }
+
     assert {:error, "Unsupported response type 'text/plain'"} = HTTP.handle_response(resp)
   end
 end

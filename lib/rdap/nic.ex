@@ -37,6 +37,7 @@ defmodule RDAP.NIC do
   def handles_ip?(%RDAP.NIC{} = nic, ip) when is_binary(ip) do
     handles_ip?(nic, InetCidr.parse_address!(ip))
   end
+
   def handles_ip?(%RDAP.NIC{} = nic, ip) when is_tuple(ip) do
     nic.blocks
     |> Enum.any?(fn cidr -> InetCidr.contains?(cidr, ip) end)

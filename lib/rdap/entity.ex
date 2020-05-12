@@ -45,5 +45,6 @@ defmodule RDAP.Entity do
   def find_entities(%{entities: entities}) do
     Enum.map(entities, &parse/1)
   end
+
   def find_entities(_), do: []
 end

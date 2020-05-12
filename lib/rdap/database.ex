@@ -32,10 +32,12 @@ defmodule RDAP.Database do
 
   @impl true
   def handle_call({:find_nic_for, ip}, _, state) do
-    answer = case Enum.find(state, fn nic -> NIC.handles_ip?(nic, ip) end) do
-      %NIC{} = nic -> nic
-      _ -> nil
-    end
+    answer =
+      case Enum.find(state, fn nic -> NIC.handles_ip?(nic, ip) end) do
+        %NIC{} = nic -> nic
+        _ -> nil
+      end
+
     {:reply, answer, state}
   end
 
@@ -51,10 +53,10 @@ defmodule RDAP.Database do
       {:error, :enoent}
   """
   def read_bootstrap(path) do
-    Logger.info fn -> "Loading bootstrap from #{path}" end
+    Logger.info(fn -> "Loading bootstrap from #{path}" end)
+
     with {:ok, str} <- File.read(path),
-         {:ok, data} <- Poison.decode(str)
-    do
+         {:ok, data} <- Poison.decode(str) do
       {:ok, load_iana(data)}
     else
       err -> err
@@ -75,11 +77,11 @@ defmodule RDAP.Database do
     data
     |> Map.get("services")
     |> Enum.map(fn service ->
-        %NIC{
-          blocks: service |> Enum.at(0) |> Enum.map(&InetCidr.parse/1),
-          endpoints: service |> Enum.at(1) |> Enum.map(&normalize_endpoint/1)
-        }
-      end)
+      %NIC{
+        blocks: service |> Enum.at(0) |> Enum.map(&InetCidr.parse/1),
+        endpoints: service |> Enum.at(1) |> Enum.map(&normalize_endpoint/1)
+      }
+    end)
   end
 
   defp normalize_endpoint(endpoint) do

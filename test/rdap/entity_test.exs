@@ -15,10 +15,14 @@ defmodule RDAP.EntityTest do
   test "captures an entity with a vcard" do
     sample = %{
       roles: ["technical"],
-      vcardArray: ["vcard", [
-        ["fn", %{}, "text", "Test"]
-      ]]
+      vcardArray: [
+        "vcard",
+        [
+          ["fn", %{}, "text", "Test"]
+        ]
+      ]
     }
+
     parsed = Entity.parse(sample)
     assert parsed.vcard.formatted_name == "Test"
     assert parsed.roles == ["technical"]
@@ -26,14 +30,16 @@ defmodule RDAP.EntityTest do
 
   test "handles a real ARIN response" do
     entity =
-    File.read!("test/fixtures/rdap_responses/ripe/de-vodafone-cable.json")
-    |> Poison.decode!(keys: :atoms)
-    |> Map.get(:entities)
-    |> Enum.at(0)
-    |> Entity.parse
+      File.read!("test/fixtures/rdap_responses/ripe/de-vodafone-cable.json")
+      |> Poison.decode!(keys: :atoms)
+      |> Map.get(:entities)
+      |> Enum.at(0)
+      |> Entity.parse()
 
     assert entity.handle == "AR13599-RIPE"
     assert entity.vcard.formatted_name == "Kabel Deutschland Abuse"
-    assert entity.vcard.address.formatted == "Vodafone Kabel Deutschland GmbH\nBetastrasse 6-8\n85774 Unterfoehring\nDE"
+
+    assert entity.vcard.address.formatted ==
+             "Vodafone Kabel Deutschland GmbH\nBetastrasse 6-8\n85774 Unterfoehring\nDE"
   end
 end

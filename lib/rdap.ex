@@ -30,15 +30,15 @@ defmodule RDAP do
   """
   def query_ip(ip) when is_tuple(ip) do
     ip
-    |> Tuple.to_list
+    |> Tuple.to_list()
     |> Enum.join(".")
     |> query_ip
   end
+
   def query_ip(ip) when is_binary(ip) do
     with %NIC{} = nic <- Database.find_nic_for(ip),
-         server       <- NIC.primary_server(nic)
-    do
-      Logger.debug fn -> "RDAP server for #{ip} is #{server}" end
+         server <- NIC.primary_server(nic) do
+      Logger.debug(fn -> "RDAP server for #{ip} is #{server}" end)
       query_ip(ip, server)
     else
       err -> {:error, err}
@@ -47,7 +47,7 @@ defmodule RDAP do
 
   def query_ip(ip, query_base) do
     url = "#{query_base}ip/#{ip}"
-    Logger.info fn -> "RDAP query: GET #{url}" end
+    Logger.info(fn -> "RDAP query: GET #{url}" end)
 
     HTTP.get(url)
   end

@@ -29,6 +29,7 @@ defmodule RDAP.VCard.Phone do
     |> put_number(number)
     |> put_types(type_or_types)
   end
+
   def parse(["tel", %{}, _, val]) do
     %Phone{}
     |> put_number(val)
@@ -43,6 +44,7 @@ defmodule RDAP.VCard.Phone do
     phone
     |> Map.put(:types, types)
   end
+
   def put_types(%Phone{} = phone, type) do
     phone
     |> put_types([type])

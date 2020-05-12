@@ -24,30 +24,33 @@ defmodule RDAP.HTTP do
     end
   end
 
-  def handle_response(%HTTPoison.Response{status_code: code} = resp) when code in(@follow_redirects) do
+  def handle_response(%HTTPoison.Response{status_code: code} = resp)
+      when code in @follow_redirects do
     next_location = get_header(resp, "Location")
-    Logger.info fn -> "Following HTTP #{code} to #{next_location}" end
+    Logger.info(fn -> "Following HTTP #{code} to #{next_location}" end)
     get(next_location)
   end
+
   def handle_response(%HTTPoison.Response{body: body, status_code: 200} = resp) do
     type = get_header(resp, "Content-Type")
     parse_body(body, type)
   end
+
   def handle_response(%HTTPoison.Response{status_code: code} = _) do
     {:error, "Not handling HTTP #{code} responses"}
   end
 
-  def parse_body(body, type) when type in(@rdap_types) do
+  def parse_body(body, type) when type in @rdap_types do
     # The Poison docs generally advises against using atoms as keys because
     # they're never garbage collected. However, we know there are only a couple dozen
     # keys that ever appear in RDAP responses, so this isn't a real worry.
-    with {:ok, json} <- Poison.decode(body, keys: :atoms)
-    do
+    with {:ok, json} <- Poison.decode(body, keys: :atoms) do
       {:ok, Response.from_json(json)}
     else
       err -> {:error, err}
     end
   end
+
   def parse_body(_body, type) do
     {:error, "Unsupported response type '#{type}'"}
   end

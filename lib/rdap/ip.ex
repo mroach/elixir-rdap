@@ -14,7 +14,7 @@ defmodule RDAP.IP do
   ]
 
   @loopback [
-    {{127, 0, 0, 0}, {127, 255, 255, 255}, 8},
+    {{127, 0, 0, 0}, {127, 255, 255, 255}, 8}
   ]
 
   @doc """
@@ -38,8 +38,9 @@ defmodule RDAP.IP do
       false
   """
   def special?(ip) when is_binary(ip) do
-    ip |> InetCidr.parse_address! |> special?
+    ip |> InetCidr.parse_address!() |> special?
   end
+
   def special?(ip) when is_tuple(ip) do
     private?(ip) || loopback?(ip) || link_local?(ip)
   end
@@ -61,8 +62,9 @@ defmodule RDAP.IP do
       false
   """
   def private?(ip) when is_binary(ip) do
-    ip |> InetCidr.parse_address! |> private?
+    ip |> InetCidr.parse_address!() |> private?
   end
+
   def private?(ip) when is_tuple(ip) do
     @private_v4
     |> Enum.any?(fn block -> InetCidr.contains?(block, ip) end)
@@ -79,8 +81,9 @@ defmodule RDAP.IP do
       false
   """
   def link_local?(ip) when is_binary(ip) do
-    ip |> InetCidr.parse_address! |> link_local?
+    ip |> InetCidr.parse_address!() |> link_local?
   end
+
   def link_local?(ip) when is_tuple(ip) do
     @link_local
     |> Enum.any?(fn block -> InetCidr.contains?(block, ip) end)
@@ -97,8 +100,9 @@ defmodule RDAP.IP do
       false
   """
   def loopback?(ip) when is_binary(ip) do
-    ip |> InetCidr.parse_address! |> loopback?
+    ip |> InetCidr.parse_address!() |> loopback?
   end
+
   def loopback?(ip) when is_tuple(ip) do
     @loopback
     |> Enum.any?(fn block -> InetCidr.contains?(block, ip) end)
