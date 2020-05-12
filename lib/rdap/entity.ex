@@ -8,7 +8,7 @@ defmodule RDAP.Entity do
   """
 
   alias __MODULE__
-  alias RDAP.{VCard}
+  alias RDAP.VCard
 
   defstruct handle: nil, roles: [], vcard: nil, entities: []
 

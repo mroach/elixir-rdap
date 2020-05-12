@@ -1,6 +1,6 @@
 defmodule RDAP.HTTPTest do
   use ExUnit.Case
-  alias RDAP.{HTTP}
+  alias RDAP.HTTP
   import Mock
 
   doctest RDAP.HTTP

@@ -1,6 +1,6 @@
 defmodule RDAPTest do
   use ExUnit.Case
-  alias RDAP.{Response}
+  alias RDAP.Response
 
   doctest RDAP
 

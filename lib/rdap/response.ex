@@ -6,7 +6,7 @@ defmodule RDAP.Response do
   """
 
   alias __MODULE__
-  alias RDAP.{Entity}
+  alias RDAP.Entity
 
   defstruct raw_response: nil,
             entities: []

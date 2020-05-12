@@ -11,16 +11,15 @@ defmodule RDAP.HTTP do
   automatically decode the response. Other types are ignored.
   """
   require Logger
-  alias RDAP.{Response}
+  alias RDAP.Response
 
   @follow_redirects [301, 302, 303, 307, 308]
   @rdap_types ~w[application/rdap+json]
 
   def get(url) do
-    with {:ok, response} <- HTTPoison.get(url) do
-      handle_response(response)
-    else
-      err -> {:error, err}
+    case HTTPoison.get(url) do
+      {:ok, response} -> handle_response(response)
+      other -> {:error, other}
     end
   end
 
@@ -44,10 +43,12 @@ defmodule RDAP.HTTP do
     # The Jason docs generally advises against using atoms as keys because
     # they're never garbage collected. However, we know there are only a couple dozen
     # keys that ever appear in RDAP responses, so this isn't a real worry.
-    with {:ok, json} <- Jason.decode(body, keys: :atoms) do
-      {:ok, Response.from_json(json)}
-    else
-      err -> {:error, err}
+    case Jason.decode(body, keys: :atoms) do
+      {:ok, json} ->
+        {:ok, Response.from_json(json)}
+
+      other ->
+        {:error, other}
     end
   end
 

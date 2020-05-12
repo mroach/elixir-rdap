@@ -2,7 +2,7 @@ defmodule RDAP.EntityTest do
   use ExUnit.Case
   doctest RDAP.Entity
 
-  alias RDAP.{Entity}
+  alias RDAP.Entity
 
   test "handles no usable data" do
     assert Entity.parse(%{}) == %Entity{}
