@@ -56,7 +56,7 @@ defmodule RDAP.Database do
     Logger.info(fn -> "Loading bootstrap from #{path}" end)
 
     with {:ok, str} <- File.read(path),
-         {:ok, data} <- Poison.decode(str) do
+         {:ok, data} <- Jason.decode(str) do
       {:ok, load_iana(data)}
     else
       err -> err

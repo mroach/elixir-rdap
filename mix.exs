@@ -20,7 +20,7 @@ defmodule RDAP.MixProject do
 
   defp deps do
     [
-      {:poison, "~> 3.1"},
+      {:jason, "~> 1.2"},
       {:httpoison, "~> 1.0"},
       {:inet_cidr, "~> 1.0.0"},
       {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false},

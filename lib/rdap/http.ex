@@ -41,10 +41,10 @@ defmodule RDAP.HTTP do
   end
 
   def parse_body(body, type) when type in @rdap_types do
-    # The Poison docs generally advises against using atoms as keys because
+    # The Jason docs generally advises against using atoms as keys because
     # they're never garbage collected. However, we know there are only a couple dozen
     # keys that ever appear in RDAP responses, so this isn't a real worry.
-    with {:ok, json} <- Poison.decode(body, keys: :atoms) do
+    with {:ok, json} <- Jason.decode(body, keys: :atoms) do
       {:ok, Response.from_json(json)}
     else
       err -> {:error, err}

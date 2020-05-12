@@ -31,7 +31,7 @@ defmodule RDAP.EntityTest do
   test "handles a real ARIN response" do
     entity =
       File.read!("test/fixtures/rdap_responses/ripe/de-vodafone-cable.json")
-      |> Poison.decode!(keys: :atoms)
+      |> Jason.decode!(keys: :atoms)
       |> Map.get(:entities)
       |> Enum.at(0)
       |> Entity.parse()
