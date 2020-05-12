@@ -23,7 +23,7 @@ defmodule RDAP.MixProject do
       {:poison, "~> 3.1"},
       {:httpoison, "~> 1.0"},
       {:inet_cidr, "~> 1.0.0"},
-      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
       {:mix_test_watch, "~> 0.9", only: :dev, runtime: false},
       {:mock, "~> 0.3.0", only: :test}
     ]
