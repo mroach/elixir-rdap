@@ -21,11 +21,10 @@ defmodule RDAP.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
-      {:httpoison, "~> 1.0"},
+      {:tesla, "~> 1.3"},
       {:inet_cidr, "~> 1.0"},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
-      {:mock, "~> 0.3", only: :test}
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
 end

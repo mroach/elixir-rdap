@@ -1,6 +1,7 @@
 defmodule RDAP.HTTP do
   @moduledoc """
-  Simple wrapper around HTTPoison to handle HTTP-related logic.
+  HTTP client for accessing RDAP services.
+
   A few key points for RDAP:
 
   HTTP 303 is used, at least by ARIN, when a requested IP is being managed by another NIC.
@@ -13,29 +14,28 @@ defmodule RDAP.HTTP do
   require Logger
   alias RDAP.Response
 
-  @follow_redirects [301, 302, 303, 307, 308]
+  use Tesla
+
   @rdap_types ~w[application/rdap+json]
 
+  plug Tesla.Middleware.Logger
+  plug Tesla.Middleware.FollowRedirects, max_redirects: 3
+  plug Tesla.Middleware.Headers, [{"accept", Enum.join(@rdap_types, ", ")}]
+  plug Tesla.Middleware.JSON, decode_content_types: @rdap_types
+
   def get(url) do
-    case HTTPoison.get(url) do
+    case get(url) do
       {:ok, response} -> handle_response(response)
       other -> {:error, other}
     end
   end
 
-  def handle_response(%HTTPoison.Response{status_code: code} = resp)
-      when code in @follow_redirects do
-    next_location = get_header(resp, "Location")
-    Logger.info(fn -> "Following HTTP #{code} to #{next_location}" end)
-    get(next_location)
-  end
-
-  def handle_response(%HTTPoison.Response{body: body, status_code: 200} = resp) do
-    type = get_header(resp, "Content-Type")
+  def handle_response(%Tesla.Env{body: body, status: 200} = resp) do
+    type = Tesla.get_header(resp, "content-type")
     parse_body(body, type)
   end
 
-  def handle_response(%HTTPoison.Response{status_code: code} = _) do
+  def handle_response(%Tesla.Env{status: code} = _) do
     {:error, "Not handling HTTP #{code} responses"}
   end
 
@@ -54,20 +54,5 @@ defmodule RDAP.HTTP do
 
   def parse_body(_body, type) do
     {:error, "Unsupported response type '#{type}'"}
-  end
-
-  @doc """
-  Find a response header by name
-
-  Example:
-      iex> %HTTPoison.Response{headers: [{"Location", "http://other.com"}] }
-      ...> |> RDAP.HTTP.get_header("Location")
-      "http://other.com"
-  """
-  def get_header(%HTTPoison.Response{headers: headers} = _, header) do
-    Enum.find_value(headers, fn
-      {^header, loc} -> loc
-      _ -> nil
-    end)
   end
 end
