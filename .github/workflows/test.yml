@@ -1,0 +1,50 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        elixir-otp:
+          # quote version numbers so they don't get parsed as numbers
+          # 1.10 would be converted to 1.1
+          - elixir: "1.10"
+            otp: 22
+          - elixir: "1.10"
+            otp: 21
+          - elixir: "1.9"
+            otp: 22
+          - elixir: "1.9"
+            otp: 21
+          - elixir: "1.9"
+            otp: 20
+          - elixir: "1.8"
+            otp: 22
+          - elixir: "1.8"
+            otp: 21
+          - elixir: "1.8"
+            otp: 20
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Elixir ${{ matrix.elixir-otp.elixir }} OTP ${{ matrix.elixir-otp.otp }}
+        uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{ matrix.elixir-otp.otp }}
+          elixir-version: ${{ matrix.elixir-otp.elixir }}
+
+      - run: mix deps.get
+
+      - run: mix test
+
+      - run: mix format --check-formatted
+
+      - run: mix credo --strict
