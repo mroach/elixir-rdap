@@ -1,6 +1,6 @@
 # Elixir RDAP Client
 
-[![CircleCI](https://circleci.com/gh/mroach/elixir-rdap.svg?style=svg)](https://circleci.com/gh/mroach/elixir-rdap)
+![Tests](https://github.com/mroach/elixir-rdap/workflows/Tests/badge.svg)
 
 > This is my first Elixir package/library. It's not yet complete and isn't yet intended for use. API may/will change and there are probably all kinds of problems with it. You've been warned :)
 
