@@ -12,7 +12,6 @@ defmodule RDAP.Response do
             entities: []
 
   def from_json(json) when is_map(json) do
-    %Response{raw_response: json}
-    |> Map.put(:entities, Entity.parse(json))
+    %Response{raw_response: json, entities: Entity.parse(json)}
   end
 end

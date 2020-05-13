@@ -49,6 +49,6 @@ defmodule RDAP do
     url = "#{query_base}ip/#{ip}"
     Logger.info(fn -> "RDAP query: GET #{url}" end)
 
-    HTTP.get(url)
+    HTTP.get_and_parse(url)
   end
 end

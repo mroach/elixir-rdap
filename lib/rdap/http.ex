@@ -21,9 +21,9 @@ defmodule RDAP.HTTP do
   plug Tesla.Middleware.Logger
   plug Tesla.Middleware.FollowRedirects, max_redirects: 3
   plug Tesla.Middleware.Headers, [{"accept", Enum.join(@rdap_types, ", ")}]
-  plug Tesla.Middleware.JSON, decode_content_types: @rdap_types
+  plug Tesla.Middleware.JSON, decode_content_types: @rdap_types, engine_opts: [keys: :atoms]
 
-  def get(url) do
+  def get_and_parse(url) do
     case get(url) do
       {:ok, response} -> handle_response(response)
       other -> {:error, other}
@@ -40,16 +40,7 @@ defmodule RDAP.HTTP do
   end
 
   def parse_body(body, type) when type in @rdap_types do
-    # The Jason docs generally advises against using atoms as keys because
-    # they're never garbage collected. However, we know there are only a couple dozen
-    # keys that ever appear in RDAP responses, so this isn't a real worry.
-    case Jason.decode(body, keys: :atoms) do
-      {:ok, json} ->
-        {:ok, Response.from_json(json)}
-
-      other ->
-        {:error, other}
-    end
+    {:ok, Response.from_json(body)}
   end
 
   def parse_body(_body, type) do
