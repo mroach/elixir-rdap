@@ -1,44 +1,45 @@
 defmodule RDAP.HTTPTest do
   use ExUnit.Case
+  import Tesla.Mock
+
   alias RDAP.HTTP
-  import Mock
 
   doctest RDAP.HTTP
 
+  setup do
+    mock(fn
+      %{url: "http://redirect-me.com/"} ->
+        %Tesla.Env{status: 303, headers: [{"location", "http://next-location.com/"}]}
+
+      %{url: "http://next-location.com/"} ->
+        json(%{"hello" => "world"})
+    end)
+
+    :ok
+  end
+
   test "follows 303 redirect" do
-    next_location = "http://example.org"
-
-    see_other_response = %HTTPoison.Response{
-      status_code: 303,
-      headers: [
-        {"Location", next_location}
-      ]
-    }
-
-    with_mock HTTPoison, get: fn ^next_location -> "OK" end do
-      HTTP.handle_response(see_other_response)
-      assert_called(HTTPoison.get(next_location))
-    end
+    assert {:ok, %{body: %{"hello" => "world"}}} = HTTP.get("http://redirect-me.com/")
   end
 
   test "recognising rdap content type" do
-    rdap_http_response = %HTTPoison.Response{
-      status_code: 200,
+    resp = %Tesla.Env{
+      status: 200,
       body: File.read!("test/fixtures/rdap_responses/ripe/de-versatel.json"),
       headers: [
-        {"Content-Type", "application/rdap+json"}
+        {"content-type", "application/rdap+json"}
       ]
     }
 
-    assert {:ok, %RDAP.Response{}} = HTTP.handle_response(rdap_http_response)
+    assert {:ok, %RDAP.Response{}} = HTTP.handle_response(resp)
   end
 
   test "unrecognised response type" do
-    resp = %HTTPoison.Response{
-      status_code: 200,
+    resp = %Tesla.Env{
+      status: 200,
       body: "OK",
       headers: [
-        {"Content-Type", "text/plain"}
+        {"content-type", "text/plain"}
       ]
     }
 
